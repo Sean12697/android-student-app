@@ -39,7 +39,7 @@ android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dob: "/>
+        android:text="DOB (YYYY-MM-DD): "/>
     <EditText
         android:id="@+id/dob"
         android:minWidth="100dip"
@@ -114,7 +114,7 @@ android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Date: "/>
+        android:text="Start Date (YYYY-MM-DD): "/>
     <EditText
         android:id="@+id/startDate"
         android:minWidth="100dip"
@@ -129,7 +129,7 @@ android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bursary: "/>
+        android:text="Bursary: "/>
     <EditText
         android:id="@+id/bursary"
         android:minWidth="100dip"

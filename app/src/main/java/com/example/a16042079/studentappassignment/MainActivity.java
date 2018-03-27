@@ -26,12 +26,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Student> students = new ArrayList<>();
-    HashMap<String, String> allStudents = new HashMap<>();
+    LinkedHashMap<String, String> allStudents = new LinkedHashMap<>(); // LINKED DUE TO NOT BEING IN ORDER WITH A HASHMAP
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Student Data App");
+        students = new ArrayList<>();
+        allStudents = new LinkedHashMap<>();
 
         ListView studentList = (ListView)findViewById(R.id.students);
         Button btnAdd = (Button)findViewById(R.id.add);
@@ -83,12 +86,11 @@ public class MainActivity extends AppCompatActivity {
         SimpleAdapter adapter = new SimpleAdapter(this, listItems, android.R.layout.simple_list_item_2,
                 new String[]{"Name", "Email"},
                 new int[]{android.R.id.text1, android.R.id.text2});
-
-        Iterator it = allStudents.entrySet().iterator();
-        while (it.hasNext())
+        
+        for (Map.Entry<String, String> entry : allStudents.entrySet())
         {
             HashMap<String, String> resultsMap = new HashMap<>();
-            Map.Entry pair = (Map.Entry)it.next();
+            Map.Entry pair = entry;
             resultsMap.put("Name", pair.getKey().toString());
             resultsMap.put("Email", pair.getValue().toString());
             listItems.add(resultsMap);
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 Toast.makeText(MainActivity.this, name + " Deleted", Toast.LENGTH_SHORT).show();
-                                onCreate(savedInstanceState);
+                                //onCreate(savedInstanceState);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
