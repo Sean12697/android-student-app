@@ -1,96 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.a16042079.studentappassignment.detailsActivity">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content">
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "/>
     <EditText
         android:id="@+id/name"
+        android:minWidth="100dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="name" />
-
-    <EditText
-        android:id="@+id/gender"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="gender"
-        android:layout_below="@+id/name"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/dob"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="dob"
-        android:layout_below="@+id/gender"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="address"
-        android:layout_below="@+id/dob"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/postcode"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="postcode"
-        android:layout_below="@+id/address"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/studentNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="studentNumber"
-        android:layout_below="@+id/postcode"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/courseTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="courseTitle"
-        android:layout_below="@+id/studentNumber"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/startDate"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="startDate"
-        android:layout_below="@+id/courseTitle"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/bursary"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="bursary"
-        android:layout_below="@+id/startDate"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="email"
-        android:layout_below="@+id/bursary"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/btnSave"
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Changes"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
-
-</RelativeLayout>
+        android:text="Gender: "/>
+    <EditText
+        android:id="@+id/gender"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="gender" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dob: "/>
+    <EditText
+        android:id="@+id/dob"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="dob" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address: "/>
+    <EditText
+        android:id="@+id/address"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="address" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postcode: "/>
+    <EditText
+        android:id="@+id/postcode"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="postcode" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Number: "/>
+    <EditText
+        android:id="@+id/studentNumber"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="studentNumber" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Course Title: "/>
+    <EditText
+        android:id="@+id/courseTitle"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="courseTitle" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Date: "/>
+    <EditText
+        android:id="@+id/startDate"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="startDate" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bursary: "/>
+    <EditText
+        android:id="@+id/bursary"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="bursary" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: "/>
+    <EditText
+        android:id="@+id/email"
+        android:minWidth="100dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="email" />
+</LinearLayout>
+<Button
+    android:id="@+id/btnSave"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Save Changes"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="16dp" />
+</LinearLayout>

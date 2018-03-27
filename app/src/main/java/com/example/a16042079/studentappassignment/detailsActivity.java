@@ -25,19 +25,18 @@ public class detailsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final Boolean adding = (boolean)extras.get("adding");
 
-        EditText name = (EditText)findViewById(R.id.name); name.setText((String)extras.get("name") == "" ? "Name" : (String)extras.get("name"));
-        EditText gender = (EditText)findViewById(R.id.gender); gender.setText((String)extras.get("gender") == "" ? "Gender" : (String)extras.get("gender"));
-        EditText dob = (EditText)findViewById(R.id.dob); dob.setText((String)extras.get("dob") == "" ? "DOB (YYYY-MM-DD)" : (String)extras.get("dob"));
-        EditText address = (EditText)findViewById(R.id.address); address.setText((String)extras.get("address") == "" ? "Address" : (String)extras.get("address"));
-        EditText postcode = (EditText)findViewById(R.id.postcode); postcode.setText((String)extras.get("postcode") == "" ? "Postcode" : (String)extras.get("postcode"));
-        EditText studentNumber = (EditText)findViewById(R.id.studentNumber); studentNumber.setText((String)extras.get("studentNumber") == "" ? "Student Number" : (String)extras.get("studentNumber"));
-        if (!adding) studentNumber.setEnabled(false);
-        EditText courseTitle = (EditText)findViewById(R.id.courseTitle); courseTitle.setText((String)extras.get("courseTitle") == "" ? "Course Title" : (String)extras.get("courseTitle"));
-        EditText startDate = (EditText)findViewById(R.id.startDate); startDate.setText((String)extras.get("startDate") == "" ? "Start Date" : (String)extras.get("startDate"));
-        EditText bursary = (EditText)findViewById(R.id.bursary); bursary.setText((String)extras.get("bursary") == "" ? "Bursary" : (String)extras.get("bursary"));
-        EditText email = (EditText)findViewById(R.id.email); email.setText((String)extras.get("email") == "" ? "Email" : (String)extras.get("email"));
+        EditText name = (EditText)findViewById(R.id.name); name.setText((String)extras.get("name"));
+        EditText gender = (EditText)findViewById(R.id.gender); gender.setText((String)extras.get("gender"));
+        EditText dob = (EditText)findViewById(R.id.dob); dob.setText((String)extras.get("dob"));
+        EditText address = (EditText)findViewById(R.id.address); address.setText((String)extras.get("address"));
+        EditText postcode = (EditText)findViewById(R.id.postcode); postcode.setText((String)extras.get("postcode"));
+        EditText studentNumber = (EditText)findViewById(R.id.studentNumber); studentNumber.setText((String)extras.get("studentNumber")); if (!adding) studentNumber.setEnabled(false);
+        EditText courseTitle = (EditText)findViewById(R.id.courseTitle); courseTitle.setText((String)extras.get("courseTitle"));
+        EditText startDate = (EditText)findViewById(R.id.startDate); startDate.setText((String)extras.get("startDate"));
+        EditText bursary = (EditText)findViewById(R.id.bursary); bursary.setText((String)extras.get("bursary"));
+        EditText email = (EditText)findViewById(R.id.email); email.setText((String)extras.get("email"));
 
-        if (adding) setTitle("Add Student Details"); else setTitle(name.getText() + " Details");
+        if (adding) setTitle("Add Student Details"); else setTitle(name.getText() + " - Details");
 
         Button btnSave = (Button)findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener()
