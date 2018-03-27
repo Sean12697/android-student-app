@@ -1,5 +1,6 @@
 package com.example.a16042079.studentappassignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,6 +60,11 @@ public class detailsActivity extends AppCompatActivity {
             }
         }
         });
+    }
+
+    public void onBackPressed() {
+        // Toast.makeText(detailsActivity.this, "You going back", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     public String updateStudent(String json) throws IOException {

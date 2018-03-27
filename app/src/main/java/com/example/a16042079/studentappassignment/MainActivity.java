@@ -140,4 +140,8 @@ public class MainActivity extends AppCompatActivity {
     public String deleteStudent(int id) throws IOException {
         return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/delete.php", "apikey=3ae2b20cca&studentnumber=" + id);
     }
+
+    public void onBackPressed() {
+        // Toast.makeText(detailsActivity.this, "Press again to exit", Toast.LENGTH_SHORT).show();
+    }
 }
