@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleAdapter adapter = new SimpleAdapter(this, listItems, android.R.layout.simple_list_item_2,
                 new String[]{"Name", "Email"},
                 new int[]{android.R.id.text1, android.R.id.text2});
-        
+
         for (Map.Entry<String, String> entry : allStudents.entrySet())
         {
             HashMap<String, String> resultsMap = new HashMap<>();
