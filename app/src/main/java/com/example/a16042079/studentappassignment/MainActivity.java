@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -40,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Student Data App");
 
         ListView studentList = (ListView)findViewById(R.id.students);
+        Button btnAdd = (Button)findViewById(R.id.add);
 
         HttpURLConnection urlConnection;
         InputStream in = null;
@@ -107,6 +110,16 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("startDate", students.get(i).getStartDate());
                 intent.putExtra("bursary", Float.toString(students.get(i).getBursary()));
                 intent.putExtra("email", students.get(i).getEmail());
+                intent.putExtra("adding", false);
+                startActivity(intent);
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {@Override
+        public void onClick(View v) {
+                //Toast.makeText(MainActivity.this, "you pressed " + allStudents.get(i), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), detailsActivity.class);
+                intent.putExtra("adding", true);
                 startActivity(intent);
             }
         });
@@ -129,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 Toast.makeText(MainActivity.this, name + " Deleted", Toast.LENGTH_SHORT).show();
                                 onCreate(savedInstanceState);
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
 

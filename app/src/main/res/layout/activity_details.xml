@@ -88,8 +88,9 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/email"
+        android:text="Save Changes"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Save Changes" />
+        android:layout_marginBottom="16dp" />
 
 </RelativeLayout>
