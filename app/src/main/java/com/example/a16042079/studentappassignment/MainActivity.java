@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
     ArrayList<Student> students = new ArrayList<>();
     LinkedHashMap<String, String> allStudents = new LinkedHashMap<>(); // LINKED DUE TO NOT BEING IN ORDER WITH A HASHMAP
-    boolean dblBack = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         ListView studentList = (ListView)findViewById(R.id.students);
         Button btnAdd = (Button)findViewById(R.id.add);
 
+
+        // NETWORK CALL
         HttpURLConnection urlConnection;
         InputStream in = null;
         try {
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println(response);
 
 
+        // ADDING STUDENTS TO GLOBAL VARIBLES
         try {
             JSONArray jsonArray = new JSONArray(response);
 
@@ -83,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // ADDING TO VIEWS
         List<HashMap<String, String>> listItems = new ArrayList<>();
         SimpleAdapter adapter = new SimpleAdapter(this, listItems, android.R.layout.simple_list_item_2,
                 new String[]{"Name", "Email"},
@@ -95,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
             resultsMap.put("Name", pair.getKey().toString());
             resultsMap.put("Email", pair.getValue().toString());
             listItems.add(resultsMap);
-        }
+        } studentList.setAdapter(adapter);
 
-        studentList.setAdapter(adapter);
 
+        //  TO VIEW DETAILS OF A STUDENT
         studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(MainActivity.this, "you pressed " + allStudents.get(i), Toast.LENGTH_SHORT).show();
@@ -118,15 +122,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // TO ADD A STUDENT
         btnAdd.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "you pressed " + allStudents.get(i), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), detailsActivity.class);
                 intent.putExtra("adding", true);
                 startActivity(intent);
             }
         });
 
+
+        // TO DELETE A STUDENT
         studentList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override public boolean onItemLongClick(AdapterView<?> parent, View view, final int i, long l) {
 
@@ -136,26 +143,19 @@ public class MainActivity extends AppCompatActivity {
                         .setTitle("Confirm Delete")
                         .setMessage("Are you sure you want to delete " + name + "?")
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() { // If yes is clicked
                             public void onClick(DialogInterface d, int btnNum) {
                                 try {
-                                    deleteStudent(students.get(i).getStudentNumber());
+                                    sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/delete.php", "apikey="+sharedFunctions.apiKey+"&studentnumber=" + students.get(i).getStudentNumber());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                                 Toast.makeText(MainActivity.this, name + " Deleted", Toast.LENGTH_SHORT).show();
-                                //onCreate(savedInstanceState);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                //finish();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
-
                 return false;
             }
         });
-    }
-
-    public String deleteStudent(int id) throws IOException {
-        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/delete.php", "apikey="+sharedFunctions.apiKey+"&studentnumber=" + id);
     }
 }

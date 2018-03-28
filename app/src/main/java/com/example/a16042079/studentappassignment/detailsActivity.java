@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class detailsActivity extends AppCompatActivity {
 
-    ArrayList<EditText> texts = new ArrayList<>(); // public to be accessable in other methods
+    ArrayList<EditText> texts = new ArrayList<>(); // public to be accessible in other methods
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class detailsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final Boolean adding = (boolean)extras.get("adding");
 
+        // VIEW DECLARTIONS, SET TEXTS AND ADD TO ARRAYLIST
         EditText name = (EditText)findViewById(R.id.name); name.setText((String)extras.get("name")); texts.add(name);
         EditText gender = (EditText)findViewById(R.id.gender); gender.setText((String)extras.get("gender")); texts.add(gender);
         EditText dob = (EditText)findViewById(R.id.dob); dob.setText((String)extras.get("dob")); texts.add(dob);
@@ -41,8 +42,9 @@ public class detailsActivity extends AppCompatActivity {
         EditText startDate = (EditText)findViewById(R.id.startDate); startDate.setText((String)extras.get("startDate")); texts.add(startDate);
         EditText bursary = (EditText)findViewById(R.id.bursary); bursary.setText((String)extras.get("bursary")); texts.add(bursary);
         EditText email = (EditText)findViewById(R.id.email); email.setText((String)extras.get("email")); texts.add(email);
-        Button btnSave = (Button)findViewById(R.id.btnSave);
+        Button btnSave = (Button)findViewById(R.id.btnSave); btnSave.setEnabled(false);
 
+        // Used to run a function when any edit text view has been modified
         for (EditText t : texts) {
             t.addTextChangedListener(new TextWatcher() {
                 @Override public void afterTextChanged(Editable s) {
@@ -53,6 +55,7 @@ public class detailsActivity extends AppCompatActivity {
             });
         }
 
+        // Used to change the title and button depending if the user is adding a student, or editing an existing one
         if (adding) {
             setTitle("Add Student Details");
             btnSave.setText("Add Student");
@@ -61,8 +64,7 @@ public class detailsActivity extends AppCompatActivity {
             btnSave.setText("Save Changes");
         }
 
-        checkFields();
-
+        // Creates a student object from fields text, then sends over to the server parsed in json (with Gson)
         btnSave.setOnClickListener(new View.OnClickListener()
         { @Override
             public void onClick(View v) {
@@ -93,6 +95,7 @@ public class detailsActivity extends AppCompatActivity {
         });
     }
 
+    // Disables save button if any field is blank, could also have other validation inside
     public void checkFields() {
         Boolean empty = false;
         Button btnSave = (Button)findViewById(R.id.btnSave);

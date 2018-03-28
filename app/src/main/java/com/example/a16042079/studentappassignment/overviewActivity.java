@@ -15,6 +15,7 @@ public class overviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overview);
         Bundle extras = getIntent().getExtras();
 
+        // Delcated to both pass to next view and use in text boxes, final needed for internal class
         final Boolean adding = (boolean)extras.get("adding");
         final String txtName = (String)extras.get("name");
         final String txtGender = (String)extras.get("gender");
@@ -27,8 +28,8 @@ public class overviewActivity extends AppCompatActivity {
         final String txtBursary = (String)extras.get("bursary");
         final String txtEmail = (String)extras.get("email");
 
+        // VIEW DECLARTIONS, SET TEXTS AND DISABLE
         Button btnEdit = (Button)findViewById(R.id.btnEdit);
-
         EditText name = (EditText)findViewById(R.id.name); name.setText(txtName); name.setEnabled(false);
         EditText gender = (EditText)findViewById(R.id.gender); gender.setText(txtGender); gender.setEnabled(false);
         EditText dob = (EditText)findViewById(R.id.dob); dob.setText(txtDOB); dob.setEnabled(false);
@@ -42,6 +43,7 @@ public class overviewActivity extends AppCompatActivity {
 
         setTitle(name.getText() + " - Details");
 
+        // GOT TO EDIT
         btnEdit.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), detailsActivity.class);
@@ -57,7 +59,6 @@ public class overviewActivity extends AppCompatActivity {
             intent.putExtra("email", txtEmail);
             intent.putExtra("adding", adding);
             startActivity(intent);
-            //finish();
         }
         });
     }
