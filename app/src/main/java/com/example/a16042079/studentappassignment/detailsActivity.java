@@ -85,6 +85,7 @@ public class detailsActivity extends AppCompatActivity {
                 // If started with the intent to add a student, used the returned string from that, else update like originally intended
                 Toast.makeText(detailsActivity.this, adding ? addStudent(gson.toJson(stu)) : updateStudent(gson.toJson(stu)), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //finish();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -105,10 +106,10 @@ public class detailsActivity extends AppCompatActivity {
     }
 
     public String addStudent(String json) throws IOException {
-        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/add.php", "apikey=3ae2b20cca&json=" + json);
+        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/add.php", "apikey="+sharedFunctions.apiKey+"&json=" + json);
     }
 
     public String updateStudent(String json) throws IOException {
-        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/update.php", "apikey=3ae2b20cca&json=" + json);
+        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/update.php", "apikey="+sharedFunctions.apiKey+"&json=" + json);
     }
 }

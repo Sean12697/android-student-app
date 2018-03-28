@@ -57,6 +57,7 @@ public class overviewActivity extends AppCompatActivity {
             intent.putExtra("email", txtEmail);
             intent.putExtra("adding", adding);
             startActivity(intent);
+            //finish();
         }
         });
     }

@@ -3,6 +3,7 @@ package com.example.a16042079.studentappassignment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     ArrayList<Student> students = new ArrayList<>();
     LinkedHashMap<String, String> allStudents = new LinkedHashMap<>(); // LINKED DUE TO NOT BEING IN ORDER WITH A HASHMAP
+    boolean dblBack = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         HttpURLConnection urlConnection;
         InputStream in = null;
         try {
-            URL url = new URL("http://radikaldesign.co.uk/sandbox/studentapi/getallstudents.php?apikey=3ae2b20cca");
+            URL url = new URL("http://radikaldesign.co.uk/sandbox/studentapi/getallstudents.php?apikey="+sharedFunctions.apiKey);
             urlConnection = (HttpURLConnection) url.openConnection();
             in = new BufferedInputStream(urlConnection.getInputStream());
         } catch (IOException e) {
@@ -144,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, name + " Deleted", Toast.LENGTH_SHORT).show();
                                 //onCreate(savedInstanceState);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                //finish();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
 
@@ -153,10 +156,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String deleteStudent(int id) throws IOException {
-        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/delete.php", "apikey=3ae2b20cca&studentnumber=" + id);
-    }
-
-    public void onBackPressed() {
-        // Toast.makeText(detailsActivity.this, "Press again to exit", Toast.LENGTH_SHORT).show();
+        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/delete.php", "apikey="+sharedFunctions.apiKey+"&studentnumber=" + id);
     }
 }

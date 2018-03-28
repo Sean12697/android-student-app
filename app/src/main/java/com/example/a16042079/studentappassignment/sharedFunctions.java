@@ -17,6 +17,8 @@ import java.nio.charset.Charset;
 
 public class sharedFunctions {
 
+    final public static String apiKey = "3ae2b20cca";
+
     public static String serverCallTest(String urlStr, String urlParms) throws IOException {
 
         URL url;
