@@ -57,7 +57,7 @@ public class detailsActivity extends AppCompatActivity {
             setTitle("Add Student Details");
             btnSave.setText("Add Student");
         } else {
-            setTitle(name.getText() + " - Details");
+            setTitle(name.getText() + " - Edit Details");
             btnSave.setText("Save Changes");
         }
 

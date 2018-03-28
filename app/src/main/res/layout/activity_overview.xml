@@ -1,0 +1,163 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: "/>
+        <EditText
+            android:id="@+id/name"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="name" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender: "/>
+        <EditText
+            android:id="@+id/gender"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="gender" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOB (YYYY-MM-DD): "/>
+        <EditText
+            android:id="@+id/dob"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="dob" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address: "/>
+        <EditText
+            android:id="@+id/address"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="address" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Postcode: "/>
+        <EditText
+            android:id="@+id/postcode"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="postcode" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Number: "/>
+        <EditText
+            android:id="@+id/studentNumber"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="studentNumber" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Title: "/>
+        <EditText
+            android:id="@+id/courseTitle"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="courseTitle" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date (YYYY-MM-DD): "/>
+        <EditText
+            android:id="@+id/startDate"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="startDate" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bursary: "/>
+        <EditText
+            android:id="@+id/bursary"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="bursary" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "/>
+        <EditText
+            android:id="@+id/email"
+            android:minWidth="100dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="email" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
+</LinearLayout>

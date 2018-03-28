@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Student Data App");
         students = new ArrayList<>();
         allStudents = new LinkedHashMap<>();
 
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(MainActivity.this, "you pressed " + allStudents.get(i), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), detailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), overviewActivity.class);
                 intent.putExtra("name", students.get(i).getName());
                 intent.putExtra("gender", students.get(i).getGender());
                 intent.putExtra("dob", students.get(i).getDob());

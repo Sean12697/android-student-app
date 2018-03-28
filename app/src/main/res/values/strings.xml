@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">StudentAppAssignment</string>
+    <string name="app_name">Student Data App</string>
+    <string name="addStu">Add Student</string>
 </resources>
