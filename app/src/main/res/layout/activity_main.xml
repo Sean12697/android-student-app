@@ -18,7 +18,7 @@
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Student"
+        android:text="@string/add_student"
         android:layout_below="@+id/students"
         android:layout_alignParentStart="true" />
 

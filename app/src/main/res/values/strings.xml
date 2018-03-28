@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">Student Data App</string>
-    <string name="addStu">Add Student</string>
+    <string name="add_student">Add Student</string>
+    <string name="eName">Name:</string>
+    <string name="name">name</string>
+    <string name="eGender">Gender:</string>
+    <string name="gender">gender</string>
+    <string name="eDob">DOB (YYYY-MM-DD):</string>
+    <string name="dob">dob</string>
+    <string name="eAddress">Address:</string>
+    <string name="address">address</string>
+    <string name="ePostcode">Postcode:</string>
+    <string name="postcode">postcode</string>
+    <string name="eStudentNumber">Student Number:</string>
+    <string name="studentnumber">studentNumber</string>
+    <string name="eCourseTitle">Course Title:</string>
+    <string name="coursetitle">courseTitle</string>
+    <string name="eStartDate">Start Date (YYYY-MM-DD):</string>
+    <string name="startdate">startDate</string>
+    <string name="eBursary">Bursary:</string>
+    <string name="bursary">bursary</string>
+    <string name="eEmail">Email:</string>
+    <string name="email">email</string>
+    <string name="tEdit">Edit</string>
+    <string name="adding">adding</string>
 </resources>
