@@ -1,6 +1,7 @@
 package com.example.a16042079.studentappassignment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,13 +23,19 @@ import java.util.ArrayList;
 public class detailsActivity extends AppCompatActivity {
 
     ArrayList<EditText> texts = new ArrayList<>(); // public to be accessible in other methods
+    // Needed for async
+    Student stu = new Student();
+    String responce = "";
+    Boolean adding = false;
+    String doing = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         Bundle extras = getIntent().getExtras();
-        final Boolean adding = (boolean)extras.get("adding");
+        adding = (boolean)extras.get("adding");
+        doing = adding ? "added" : "updated";
 
         // VIEW DECLARTIONS, SET TEXTS AND ADD TO ARRAYLIST
         EditText name = (EditText)findViewById(R.id.name); name.setText((String)extras.get("name")); texts.add(name);
@@ -68,7 +75,7 @@ public class detailsActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener()
         { @Override
             public void onClick(View v) {
-                Student stu = new Student(
+                stu = new Student(
                         ((EditText)findViewById(R.id.name)).getText().toString(),
                         ((EditText)findViewById(R.id.gender)).getText().toString(),
                         ((EditText)findViewById(R.id.dob)).getText().toString(),
@@ -79,16 +86,7 @@ public class detailsActivity extends AppCompatActivity {
                         ((EditText)findViewById(R.id.startDate)).getText().toString(),
                         Float.parseFloat(((EditText)findViewById(R.id.studentNumber)).getText().toString()),
                         ((EditText)findViewById(R.id.email)).getText().toString()
-                );
-            try {
-                // If started with the intent to add a student, used the returned string from that, else update like originally intended
-                Gson gson = new Gson();
-                Toast.makeText(detailsActivity.this, adding ? addStudent(gson.toJson(stu)) : updateStudent(gson.toJson(stu)), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                //finish();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                ); sendStu send = new sendStu(); send.execute();
         }
         });
     }
@@ -106,11 +104,36 @@ public class detailsActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
-    public String addStudent(String json) throws IOException {
-        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/add.php", "apikey="+sharedFunctions.apiKey+"&json=" + json);
-    }
+    // ----------------------------------------------------------- ASYNC CLASS -----------------------------------------------------------
 
-    public String updateStudent(String json) throws IOException {
-        return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/update.php", "apikey="+sharedFunctions.apiKey+"&json=" + json);
+    private class sendStu extends AsyncTask<Void, Void, String>
+
+    {
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                Gson gson = new Gson();
+                // If started with the intent to add a student, used the returned string from that, else update like originally intended
+                return adding ? addStudent(gson.toJson(stu)) : updateStudent(gson.toJson(stu));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+        }
+
+        protected void onPostExecute (String responce)
+        {
+            // If the response is 1 (successful), state if the student id added/updated, else pop up the server response then go back to the main screen
+            Toast.makeText(detailsActivity.this, responce.equals(Integer.toString(1)) ? stu.getName() + " " + doing : responce, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+
+        protected String addStudent(String json) throws IOException {
+            return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/add.php", "apikey="+sharedFunctions.apiKey+"&json=" + json);
+        }
+
+        protected String updateStudent(String json) throws IOException {
+            return sharedFunctions.serverCallTest("http://radikaldesign.co.uk/sandbox/studentapi/update.php", "apikey="+sharedFunctions.apiKey+"&json=" + json);
+        }
     }
 }

@@ -30,6 +30,10 @@ public class Student extends Person implements Serializable {
         this.email = email;
     }
 
+    public Student() {
+        super();
+    }
+
     public int getStudentNumber() {
         return studentNumber;
     }
