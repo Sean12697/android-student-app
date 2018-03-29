@@ -80,11 +80,9 @@ public class detailsActivity extends AppCompatActivity {
                         Float.parseFloat(((EditText)findViewById(R.id.studentNumber)).getText().toString()),
                         ((EditText)findViewById(R.id.email)).getText().toString()
                 );
-                HttpURLConnection urlConnection;
-                InputStream in = null;
-                Gson gson = new Gson();
             try {
                 // If started with the intent to add a student, used the returned string from that, else update like originally intended
+                Gson gson = new Gson();
                 Toast.makeText(detailsActivity.this, adding ? addStudent(gson.toJson(stu)) : updateStudent(gson.toJson(stu)), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 //finish();
