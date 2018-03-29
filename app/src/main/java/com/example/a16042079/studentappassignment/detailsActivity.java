@@ -106,9 +106,7 @@ public class detailsActivity extends AppCompatActivity {
 
     // ----------------------------------------------------------- ASYNC CLASS -----------------------------------------------------------
 
-    private class sendStu extends AsyncTask<Void, Void, String>
-
-    {
+    private class sendStu extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
             try {

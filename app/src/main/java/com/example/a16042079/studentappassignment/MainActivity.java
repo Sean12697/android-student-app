@@ -1,8 +1,10 @@
 package com.example.a16042079.studentappassignment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Student> students = new ArrayList<>();
     LinkedHashMap<String, String> allStudents = new LinkedHashMap<>(); // LINKED DUE TO NOT BEING IN ORDER WITH A HASHMAP
+    // FOR ASYNC
+    JSONArray jsonArray = new JSONArray();
+    ListView studentList;
+    Context context;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -46,61 +54,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         students = new ArrayList<>();
         allStudents = new LinkedHashMap<>();
+        context = this;
 
-        ListView studentList = (ListView)findViewById(R.id.students);
+        studentList = (ListView)findViewById(R.id.students);
         Button btnAdd = (Button)findViewById(R.id.add);
 
-
-        // NETWORK CALL
-        HttpURLConnection urlConnection;
-        InputStream in = null;
-        try {
-            URL url = new URL("http://radikaldesign.co.uk/sandbox/studentapi/getallstudents.php?apikey="+sharedFunctions.apiKey);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            in = new BufferedInputStream(urlConnection.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } String response = sharedFunctions.convertStreamToString(in);
-        //System.out.println(response);
-
-
-        // ADDING STUDENTS TO GLOBAL VARIBLES
-        try {
-            JSONArray jsonArray = new JSONArray(response);
-
-            for (int i=0; i < jsonArray.length(); i++) {
-                String name = jsonArray.getJSONObject(i).get("name").toString();
-                String gender  = jsonArray.getJSONObject(i).get("gender").toString();
-                String dob = jsonArray.getJSONObject(i).get("dob").toString();
-                String address = jsonArray.getJSONObject(i).get("address").toString();
-                String postcode = jsonArray.getJSONObject(i).get("postcode").toString();
-                int studentNumber = Integer.parseInt(jsonArray.getJSONObject(i).get("studentNumber").toString());
-                String courseTitle = jsonArray.getJSONObject(i).get("courseTitle").toString();
-                String startDate = jsonArray.getJSONObject(i).get("startDate").toString();
-                float bursary = Float.parseFloat(jsonArray.getJSONObject(i).get("bursary").toString());
-                String email = jsonArray.getJSONObject(i).get("email").toString();
-                students.add(new Student(name, gender, dob, address, postcode, studentNumber, courseTitle, startDate, bursary, email));
-                allStudents.put(name, email);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // ADDING TO VIEWS
-        List<HashMap<String, String>> listItems = new ArrayList<>();
-        SimpleAdapter adapter = new SimpleAdapter(this, listItems, android.R.layout.simple_list_item_2,
-                new String[]{"Name", "Email"},
-                new int[]{android.R.id.text1, android.R.id.text2});
-
-        for (Map.Entry<String, String> entry : allStudents.entrySet())
-        {
-            HashMap<String, String> resultsMap = new HashMap<>();
-            Map.Entry pair = entry;
-            resultsMap.put("Name", pair.getKey().toString());
-            resultsMap.put("Email", pair.getValue().toString());
-            listItems.add(resultsMap);
-        } studentList.setAdapter(adapter);
-
+        // START ASYNC
+        getAllStu getAllStu = new getAllStu();
+        getAllStu.execute();
 
         //  TO VIEW DETAILS OF A STUDENT
         studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // TO ADD A STUDENT
         btnAdd.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
@@ -131,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         // TO DELETE A STUDENT
         studentList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -157,5 +116,73 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    // ----------------------------------------------------------- ASYNC CLASS -----------------------------------------------------------
+
+    private class getAllStu extends AsyncTask<Void, Void, JSONArray>
+    {
+        @Override
+        protected JSONArray doInBackground(Void... voids) {
+
+            // NETWORK CALL
+            HttpURLConnection urlConnection;
+            InputStream in = null;
+            try {
+                URL url = new URL("http://radikaldesign.co.uk/sandbox/studentapi/getallstudents.php?apikey="+sharedFunctions.apiKey);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                in = new BufferedInputStream(urlConnection.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } String response = sharedFunctions.convertStreamToString(in);
+
+            // Parse responce
+            try {
+                jsonArray = new JSONArray(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return jsonArray;
+        }
+
+        protected void onPostExecute (JSONArray jsonArray)
+        {
+            // ADDING STUDENTS TO GLOBAL VARIBLES
+            try {
+
+                for (int i=0; i < jsonArray.length(); i++) {
+                    String name = jsonArray.getJSONObject(i).get("name").toString();
+                    String gender  = jsonArray.getJSONObject(i).get("gender").toString();
+                    String dob = jsonArray.getJSONObject(i).get("dob").toString();
+                    String address = jsonArray.getJSONObject(i).get("address").toString();
+                    String postcode = jsonArray.getJSONObject(i).get("postcode").toString();
+                    int studentNumber = Integer.parseInt(jsonArray.getJSONObject(i).get("studentNumber").toString());
+                    String courseTitle = jsonArray.getJSONObject(i).get("courseTitle").toString();
+                    String startDate = jsonArray.getJSONObject(i).get("startDate").toString();
+                    float bursary = Float.parseFloat(jsonArray.getJSONObject(i).get("bursary").toString());
+                    String email = jsonArray.getJSONObject(i).get("email").toString();
+                    students.add(new Student(name, gender, dob, address, postcode, studentNumber, courseTitle, startDate, bursary, email));
+                    allStudents.put(name, email);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            // ADDING TO VIEWS
+            List<HashMap<String, String>> listItems = new ArrayList<>();
+            SimpleAdapter adapter = new SimpleAdapter(context, listItems, android.R.layout.simple_list_item_2,
+                    new String[]{"Name", "Email"},
+                    new int[]{android.R.id.text1, android.R.id.text2});
+
+            for (Map.Entry<String, String> entry : allStudents.entrySet())
+            {
+                HashMap<String, String> resultsMap = new HashMap<>();
+                Map.Entry pair = entry;
+                resultsMap.put("Name", pair.getKey().toString());
+                resultsMap.put("Email", pair.getValue().toString());
+                listItems.add(resultsMap);
+            } studentList.setAdapter(adapter);
+        }
     }
 }
